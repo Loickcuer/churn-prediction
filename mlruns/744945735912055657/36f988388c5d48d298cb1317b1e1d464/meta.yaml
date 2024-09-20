@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/744945735912055657/36f988388c5d48d298cb1317b1e1d464/artifacts
+end_time: 1726583245906
+entry_point_name: ''
+experiment_id: '744945735912055657'
+lifecycle_stage: active
+run_id: 36f988388c5d48d298cb1317b1e1d464
+run_name: XGB_RUS_Normalized
+run_uuid: 36f988388c5d48d298cb1317b1e1d464
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726583226587
+status: 3
+tags: []
+user_id: loick

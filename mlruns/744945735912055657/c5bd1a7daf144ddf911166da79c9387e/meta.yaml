@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/744945735912055657/c5bd1a7daf144ddf911166da79c9387e/artifacts
+end_time: 1726508015895
+entry_point_name: ''
+experiment_id: '744945735912055657'
+lifecycle_stage: active
+run_id: c5bd1a7daf144ddf911166da79c9387e
+run_name: RF_HyperparamTuning_Balanced
+run_uuid: c5bd1a7daf144ddf911166da79c9387e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726507903414
+status: 3
+tags: []
+user_id: loick

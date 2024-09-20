@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/744945735912055657/a77ec911442848b7a05721c258649cad/artifacts
+end_time: 1726504087461
+entry_point_name: ''
+experiment_id: '744945735912055657'
+lifecycle_stage: active
+run_id: a77ec911442848b7a05721c258649cad
+run_name: RF_SMOTE_Weighted
+run_uuid: a77ec911442848b7a05721c258649cad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726503708523
+status: 3
+tags: []
+user_id: loick

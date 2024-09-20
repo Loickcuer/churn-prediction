@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/744945735912055657/7fc7a765cdbe42d6b8b7443232440fbe/artifacts
+end_time: 1726499808806
+entry_point_name: ''
+experiment_id: '744945735912055657'
+lifecycle_stage: active
+run_id: 7fc7a765cdbe42d6b8b7443232440fbe
+run_name: RF1
+run_uuid: 7fc7a765cdbe42d6b8b7443232440fbe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726499796368
+status: 3
+tags: []
+user_id: loick

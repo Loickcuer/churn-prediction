@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/740896136898023634/3230a08457c341198eccdaebf25652d2/artifacts
+deleted_time: 1726498976424
+end_time: 1726498859896
+entry_point_name: ''
+experiment_id: '740896136898023634'
+lifecycle_stage: deleted
+run_id: 3230a08457c341198eccdaebf25652d2
+run_name: gentle-lynx-939
+run_uuid: 3230a08457c341198eccdaebf25652d2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726498850881
+status: 3
+tags: []
+user_id: loick

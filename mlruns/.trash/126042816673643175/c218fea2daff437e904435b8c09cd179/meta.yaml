@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/126042816673643175/c218fea2daff437e904435b8c09cd179/artifacts
+deleted_time: 1726498973521
+end_time: 1726498850778
+entry_point_name: ''
+experiment_id: '126042816673643175'
+lifecycle_stage: deleted
+run_id: c218fea2daff437e904435b8c09cd179
+run_name: beautiful-grub-367
+run_uuid: c218fea2daff437e904435b8c09cd179
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726498847176
+status: 3
+tags: []
+user_id: loick

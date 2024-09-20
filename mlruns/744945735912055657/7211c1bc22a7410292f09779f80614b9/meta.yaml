@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/744945735912055657/7211c1bc22a7410292f09779f80614b9/artifacts
+end_time: 1726582168823
+entry_point_name: ''
+experiment_id: '744945735912055657'
+lifecycle_stage: active
+run_id: 7211c1bc22a7410292f09779f80614b9
+run_name: Improved_Stacking_Model_with_Undersampling
+run_uuid: 7211c1bc22a7410292f09779f80614b9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726582161920
+status: 3
+tags: []
+user_id: loick
