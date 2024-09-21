@@ -1,32 +1,31 @@
-from pathlib import Path
+import os
 
-from dotenv import load_dotenv
-from loguru import logger
+# Chemins des dossiers
+CURRENT_DIR = os.getcwd()
+PARENT_DIR = os.path.dirname(CURRENT_DIR)
+DATA_PATH = os.path.join(PARENT_DIR, "data", "raw", "dataset.csv")
+INTERIM_DATA_PATH = os.path.join(PARENT_DIR, "data", "interim", "data.parquet")
+PROCESSED_DATA_PATH = os.path.join(PARENT_DIR, "data", "processed", "data.parquet")
+MODELS_FOLDER = os.path.join(PARENT_DIR, "models")
 
-# Load environment variables from .env file if it exists
-load_dotenv()
+RF_IMPORTANT_FEATURES = [
+    'age', 'anciennete_mois', 'interet_compte_epargne_total', 'PC1',
+    'agios_6mois', 'PC2', 'score_engagement', 'score_risque_financier',
+    'PC4'
+]
+XGB_IMPORTANT_FEATURES = ["assurance_auto_non", "compte_courant_False", "cartes_bancaires_medium", "methode_contact_mail", "categorie_age_65+", "anciennete_mois", "age", "espace_client_non", "segment_client_B3", "segment_client_A3", "segment_client_D2", "segment_client_D3", "segment_client_B4", "segment_client_A2", "PC1", "interet_compte_epargne_total", "type_perso", "compte_titres", "PEA_non"]
 
-# Paths
-PROJ_ROOT = Path(__file__).resolve().parents[1]
-logger.info(f"PROJ_ROOT path is: {PROJ_ROOT}")
 
-DATA_DIR = PROJ_ROOT / "data"
-RAW_DATA_DIR = DATA_DIR / "raw"
-INTERIM_DATA_DIR = DATA_DIR / "interim"
-PROCESSED_DATA_DIR = DATA_DIR / "processed"
-EXTERNAL_DATA_DIR = DATA_DIR / "external"
+# Configuration MLflow
+MLFLOW_TRACKING_URI = f"file:{MODELS_FOLDER}"
+MLFLOW_EXPERIMENT_NAME = "Churn_Prediction"
+CURRENT_BEST_MODEL = "../models/549845065003665155/c861ac4dce9646eab2a2c7ddf6e0b8a2/artifacts/XGBoost_Tuned_RUS_Normalized/model.pkl" #changer par un nouveau modèle si besoin
 
-MODELS_DIR = PROJ_ROOT / "models"
+# Configuration pandas
+PANDAS_DISPLAY_OPTIONS = {
+    'display.max_columns': None,
+    'display.max_rows': None
+}
 
-REPORTS_DIR = PROJ_ROOT / "reports"
-FIGURES_DIR = REPORTS_DIR / "figures"
-
-# If tqdm is installed, configure loguru with tqdm.write
-# https://github.com/Delgan/loguru/issues/135
-try:
-    from tqdm import tqdm
-
-    logger.remove(0)
-    logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
-except ModuleNotFoundError:
-    pass
+# Configuration des warnings
+IGNORE_WARNINGS = ["ignore", UserWarning]

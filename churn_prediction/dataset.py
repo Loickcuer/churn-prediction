@@ -1,29 +1,78 @@
-from pathlib import Path
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from pyod.models.iforest import IForest
+from config import DATA_PATH, INTERIM_DATA_PATH
 
-import typer
-from loguru import logger
-from tqdm import tqdm
+def load_data(path=DATA_PATH): # Charge les données à partir du fichier CSV.
+    return pd.read_csv(path, delimiter=';')
 
-from churn_prediction.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
+def preprocess_data(df): # Prétraite les données en effectuant les opérations suivantes:
+    # Conversion des types
+    df['interet_compte_epargne_total'] = pd.to_numeric(df['interet_compte_epargne_total'], errors='coerce')
+    df['id_client'] = df['id_client'].astype(str)
 
-app = typer.Typer()
+    # Gestion des valeurs manquantes
+    catcols = [col for col in df.columns if df[col].dtype == 'object']
+    for col in catcols:
+        df[col] = df[col].fillna(df[col].mode()[0])
 
+    for col in df.select_dtypes(include=[np.number]).columns:
+        df[col] = df[col].fillna(df[col].mode()[0])
 
-@app.command()
-def main(
-    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    input_path: Path = RAW_DATA_DIR / "dataset.csv",
-    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-    # ----------------------------------------------
-):
-    # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Processing dataset...")
-    for i in tqdm(range(10), total=10):
-        if i == 5:
-            logger.info("Something happened for iteration 5.")
-    logger.success("Processing dataset complete.")
-    # -----------------------------------------
+    # Conversion des types booléens
+    bool_columns = ['espace_client_web', 'assurance_vie', 'banque_principale', 
+                    'compte_epargne', 'compte_courant', 'churn', 'compte_titres']
+    for col in bool_columns:
+        df[col] = df[col].map({'oui': True, 'non': False})
 
+    # Traitement des valeurs aberrantes
+    df = remove_outliers(df)
+
+    return df
+
+def remove_outliers(df): #Supprime les valeurs aberrantes en utilisant Isolation Forest.
+    
+    clf = IForest(contamination=0.001, random_state=42)
+    
+    for col in ['anciennete_mois', 'interet_compte_epargne_total']:
+        values = df[[col]].values
+        clf.fit(values)
+        y_pred = clf.predict(values)
+        df = df[y_pred == 0]
+    
+    return df
+
+def save_processed_data(df, path=INTERIM_DATA_PATH): # Sauvegarde les données prétraitées au format Parquet.
+
+    df.to_parquet(path, engine='auto', compression='snappy', index=False)
+
+def load_processed_data(path=INTERIM_DATA_PATH):    # Charge les données prétraitées à partir du fichier Parquet.
+    return pd.read_parquet(path)
 
 if __name__ == "__main__":
-    app()
+    # Charger les données brutes
+    print("Chargement des données brutes...")
+    raw_data = load_data()
+    print(f"Données brutes chargées. Shape: {raw_data.shape}")
+
+    # Prétraiter les données
+    print("Prétraitement des données...")
+    processed_data = preprocess_data(raw_data)
+    print(f"Données prétraitées. Shape: {processed_data.shape}")
+
+    # Sauvegarder les données prétraitées
+    print("Sauvegarde des données prétraitées...")
+    save_processed_data(processed_data)
+    print("Données prétraitées sauvegardées.")
+
+    # Charger les données prétraitées pour vérification
+    print("Chargement des données prétraitées pour vérification...")
+    loaded_data = load_processed_data()
+    print(f"Données prétraitées chargées. Shape: {loaded_data.shape}")
+
+    # Vérifier que les données sauvegardées et chargées sont identiques
+    assert loaded_data.equals(processed_data), "Les données chargées ne correspondent pas aux données sauvegardées!"
+    print("Vérification réussie : les données sauvegardées et chargées sont identiques.")
+
+    print("Processus de traitement des données terminé avec succès.")
