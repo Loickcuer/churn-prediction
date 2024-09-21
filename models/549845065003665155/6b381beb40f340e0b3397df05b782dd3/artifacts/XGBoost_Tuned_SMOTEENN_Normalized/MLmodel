@@ -1,0 +1,20 @@
+artifact_path: XGBoost_Tuned_SMOTEENN_Normalized
+flavors:
+  python_function:
+    data: model.xgb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.11.9
+  xgboost:
+    code: null
+    data: model.xgb
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: xgb
+    xgb_version: 2.1.1
+mlflow_version: 2.16.1
+model_size_bytes: 392891
+model_uuid: a4958f951c7c481bbbf271bebbffbc0e
+run_id: 6b381beb40f340e0b3397df05b782dd3
+utc_time_created: '2024-09-21 18:40:57.043551'

@@ -1,0 +1,15 @@
+artifact_uri: file:c:\Users\loick\Desktop\churn_prediction\models/549845065003665155/3ed7bb45d8b241c893e0d009dac1ff34/artifacts
+end_time: 1726943934385
+entry_point_name: ''
+experiment_id: '549845065003665155'
+lifecycle_stage: active
+run_id: 3ed7bb45d8b241c893e0d009dac1ff34
+run_name: RF_SMOTEENN_Weighted
+run_uuid: 3ed7bb45d8b241c893e0d009dac1ff34
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726943711135
+status: 3
+tags: []
+user_id: loick

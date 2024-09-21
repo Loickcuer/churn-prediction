@@ -1,0 +1,15 @@
+artifact_uri: file:c:\Users\loick\Desktop\churn_prediction\models/549845065003665155/eb48679206fa45e6852dbabfd23a075a/artifacts
+end_time: 1726938369253
+entry_point_name: ''
+experiment_id: '549845065003665155'
+lifecycle_stage: active
+run_id: eb48679206fa45e6852dbabfd23a075a
+run_name: RF_HyperparamTuning_Balanced
+run_uuid: eb48679206fa45e6852dbabfd23a075a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726938252584
+status: 3
+tags: []
+user_id: loick

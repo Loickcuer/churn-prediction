@@ -1,0 +1,15 @@
+artifact_uri: file:c:\Users\loick\Desktop\churn_prediction\models/549845065003665155/1f502a5bfb4041bb8501a88bdbabb083/artifacts
+end_time: 1726936316952
+entry_point_name: ''
+experiment_id: '549845065003665155'
+lifecycle_stage: active
+run_id: 1f502a5bfb4041bb8501a88bdbabb083
+run_name: XGB_RUS_Normalized
+run_uuid: 1f502a5bfb4041bb8501a88bdbabb083
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726936306174
+status: 3
+tags: []
+user_id: loick

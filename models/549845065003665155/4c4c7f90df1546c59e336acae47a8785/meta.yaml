@@ -1,0 +1,15 @@
+artifact_uri: file:c:\Users\loick\Desktop\churn_prediction\models/549845065003665155/4c4c7f90df1546c59e336acae47a8785/artifacts
+end_time: 1726944076253
+entry_point_name: ''
+experiment_id: '549845065003665155'
+lifecycle_stage: active
+run_id: 4c4c7f90df1546c59e336acae47a8785
+run_name: Improved_Stacking_Model_with_Undersampling
+run_uuid: 4c4c7f90df1546c59e336acae47a8785
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726944071477
+status: 3
+tags: []
+user_id: loick
