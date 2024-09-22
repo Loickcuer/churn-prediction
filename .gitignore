@@ -2,9 +2,38 @@
 /data/interim/data.parquet
 /data/processed/data.parquet
 
+# Documentation
 /docs/df.xlsx
 /docs/df_high_risk.xlsx
 
+# Models
 /models/*
 
-/venv/*
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
