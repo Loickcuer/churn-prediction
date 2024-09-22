@@ -81,21 +81,3 @@ def create_features(df):
     df = apply_pca(df, columns_to_pca)
     
     return df
-
-if __name__ == "__main__":
-    # Charger les données
-    print("Chargement des données...")
-    df = pd.read_parquet(INTERIM_DATA_PATH)
-    
-    # Créer les features
-    print("Création des features...")
-    df = create_features(df)
-    
-    # Sauvegarder les données avec les nouvelles features
-    print("Sauvegarde des données avec les nouvelles features...")
-    df.to_parquet(PROCESSED_DATA_PATH, engine='auto', compression='snappy', index=False)
-    
-    print(f"Données sauvegardées dans {PROCESSED_DATA_PATH}")
-    print(f"Shape des données: {df.shape}")
-    print("\nAperçu des nouvelles features:")
-    print(df[['score_engagement', 'score_risque_financier', 'categorie_age']].describe())

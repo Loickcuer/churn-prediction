@@ -49,30 +49,3 @@ def save_processed_data(df, path=INTERIM_DATA_PATH): # Sauvegarde les données p
 
 def load_processed_data(path=INTERIM_DATA_PATH):    # Charge les données prétraitées à partir du fichier Parquet.
     return pd.read_parquet(path)
-
-if __name__ == "__main__":
-    # Charger les données brutes
-    print("Chargement des données brutes...")
-    raw_data = load_data()
-    print(f"Données brutes chargées. Shape: {raw_data.shape}")
-
-    # Prétraiter les données
-    print("Prétraitement des données...")
-    processed_data = preprocess_data(raw_data)
-    print(f"Données prétraitées. Shape: {processed_data.shape}")
-
-    # Sauvegarder les données prétraitées
-    print("Sauvegarde des données prétraitées...")
-    save_processed_data(processed_data)
-    print("Données prétraitées sauvegardées.")
-
-    # Charger les données prétraitées pour vérification
-    print("Chargement des données prétraitées pour vérification...")
-    loaded_data = load_processed_data()
-    print(f"Données prétraitées chargées. Shape: {loaded_data.shape}")
-
-    # Vérifier que les données sauvegardées et chargées sont identiques
-    assert loaded_data.equals(processed_data), "Les données chargées ne correspondent pas aux données sauvegardées!"
-    print("Vérification réussie : les données sauvegardées et chargées sont identiques.")
-
-    print("Processus de traitement des données terminé avec succès.")

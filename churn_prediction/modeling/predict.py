@@ -5,7 +5,7 @@ import joblib
 import mlflow
 import subprocess
 import os
-from config import CURRENT_BEST_MODEL, PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
+from churn_prediction.config import CURRENT_BEST_MODEL, PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
 
 def load_model(model_path=CURRENT_BEST_MODEL):
     return joblib.load(model_path)
@@ -67,24 +67,3 @@ def save_predictions_to_excel(df, y_pred, y_pred_proba):
 def run_streamlit_app():
     streamlit_path = os.path.join("..", "docs", "streamlit_app.py")
     subprocess.Popen(["streamlit", "run", streamlit_path])
-
-if __name__ == "__main__":
-    # Charger les données
-    df = pd.read_parquet(PROCESSED_DATA_PATH)
-    X = df[XGB_IMPORTANT_FEATURES]
-    y = df['churn']
-    
-    # Faire des prédictions et évaluer le modèle
-    y_pred, y_pred_proba, metrics = predict_and_evaluate(X, y)
-    
-    print("\nMétriques pour le modèle:")
-    for metric, value in metrics.items():
-        print(f"{metric}: {value:.4f}")
-    
-    # Sauvegarder les prédictions dans un fichier Excel
-    save_predictions_to_excel(df, y_pred, y_pred_proba)
-    
-    # Lancer l'application Streamlit
-    run_streamlit_app()
-    
-    print("Streamlit app is running. Open your web browser to view it.")

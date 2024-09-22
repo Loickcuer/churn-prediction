@@ -16,11 +16,6 @@ RF_IMPORTANT_FEATURES = [
 XGB_IMPORTANT_FEATURES = ["assurance_auto_non", "compte_courant_False", "cartes_bancaires_medium", "methode_contact_mail", "categorie_age_65+", "anciennete_mois", "age", "espace_client_non", "segment_client_B3", "segment_client_A3", "segment_client_D2", "segment_client_D3", "segment_client_B4", "segment_client_A2", "PC1", "interet_compte_epargne_total", "type_perso", "compte_titres", "PEA_non"]
 
 
-# Configuration MLflow
-MLFLOW_TRACKING_URI = f"file:{MODELS_FOLDER}"
-MLFLOW_EXPERIMENT_NAME = "Churn_Prediction"
-CURRENT_BEST_MODEL = "../models/549845065003665155/c861ac4dce9646eab2a2c7ddf6e0b8a2/artifacts/XGBoost_Tuned_RUS_Normalized/model.pkl" #changer par un nouveau modèle si besoin
-
 # Configuration pandas
 PANDAS_DISPLAY_OPTIONS = {
     'display.max_columns': None,
