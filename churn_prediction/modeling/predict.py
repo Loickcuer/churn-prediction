@@ -5,10 +5,7 @@ import joblib
 import mlflow
 import subprocess
 import os
-from churn_prediction.config import CURRENT_BEST_MODEL, PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
-
-def load_model(model_path=CURRENT_BEST_MODEL):
-    return joblib.load(model_path)
+from churn_prediction.config import PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
 
 def make_predictions(model, X_test):
     return model.predict(X_test)
