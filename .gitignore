@@ -2,10 +2,6 @@
 /data/interim/data.parquet
 /data/processed/data.parquet
 
-# Documentation
-/docs/df.xlsx
-/docs/df_high_risk.xlsx
-
 # Models
 /models/*
 
