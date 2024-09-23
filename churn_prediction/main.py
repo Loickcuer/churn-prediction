@@ -6,7 +6,7 @@ import joblib
 import os
 import subprocess
 
-from config import DATA_PATH, INTERIM_DATA_PATH, PROCESSED_DATA_PATH, MODELS_FOLDER, XGB_IMPORTANT_FEATURES, CURRENT_BEST_MODEL
+from config import DATA_PATH, INTERIM_DATA_PATH, PROCESSED_DATA_PATH, MODELS_FOLDER, XGB_IMPORTANT_FEATURES
 from dataset import load_data, preprocess_data, save_processed_data
 from features import create_features
 from modeling.train import split_data, handle_class_imbalance, train_xgboost, evaluate_model, save_model
