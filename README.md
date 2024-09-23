@@ -11,7 +11,7 @@ Just install the requirements and run the main.py file, it will clean the datase
 
 ## Streamlit App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)] https://loickcuer-churn-prediction-docsstreamlit-app-susqjw.streamlit.app/
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)] (https://loickcuer-churn-prediction-docsstreamlit-app-susqjw.streamlit.app/)
 
 ## Project Organization
 
