@@ -52,7 +52,11 @@ def main():
     print("Sauvegarde des prédictions...")
     save_predictions_to_excel(df.loc[X_test.index], y_pred, y_pred_proba)
 
-    print("Lancement de l'application Streamlit...")
+    df = pd.read_excel("../docs/df.xlsx")
+    df_high_risk = df[df['churn_class'] == 'Very High Risk']
+    df_high_risk.to_excel('../docs/df_high_risk.xlsx', index=False)
+    print("Fichiers Excel générés avec succès.")
+
     run_streamlit_app()
 
 if __name__ == "__main__":

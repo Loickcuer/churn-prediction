@@ -9,7 +9,6 @@ st.set_page_config(page_title="Prédiction de Churn", page_icon="🔮", layout="
 def load_data():
     return pd.read_excel("../docs/df.xlsx")
 
-@st.cache_data
 def load_high_risk_data():
     return pd.read_excel('../docs/df_high_risk.xlsx')
 
