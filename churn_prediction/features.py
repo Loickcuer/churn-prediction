@@ -10,11 +10,10 @@ def load_data(path=DATA_PATH):
     return pd.read_csv(path, delimiter=';')
 
 def preprocess_data(df):
-    # Conversion des types
-    df['interet_compte_epargne_total'] = pd.to_numeric(df['interet_compte_epargne_total'], errors='coerce')
+    
+    df['interet_compte_epargne_total'] = pd.to_numeric(df['interet_compte_epargne_total'], errors='coerce') 
     df['id_client'] = df['id_client'].astype(str)
-
-    # Gestion des valeurs manquantes
+    
     catcols = df.select_dtypes(include=['object']).columns
     for col in catcols:
         df[col] = df[col].fillna(df[col].mode()[0])
@@ -23,13 +22,11 @@ def preprocess_data(df):
     for col in numcols:
         df[col] = df[col].fillna(df[col].median())
 
-    # Conversion des types booléens
     bool_columns = ['espace_client_web', 'assurance_vie', 'banque_principale', 
                     'compte_epargne', 'compte_courant', 'churn', 'compte_titres']
     for col in bool_columns:
         df[col] = df[col].map({'oui': True, 'non': False})
 
-    # Traitement des valeurs aberrantes
     df = remove_outliers(df)
 
     return df

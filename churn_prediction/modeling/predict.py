@@ -58,7 +58,6 @@ def save_predictions_to_excel(df, y_pred, y_pred_proba):
     print("\nSample of predictions:")
     print(df[['churn_score', 'churn_class']].head())
     
-    # Create and save df_high_risk
     df_high_risk = df[df['churn_class'] == 'Very High Risk']
     print("\nHigh risk clients:")
     print(df_high_risk.head())
