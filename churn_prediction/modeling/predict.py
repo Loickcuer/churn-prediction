@@ -1,11 +1,15 @@
 import pandas as pd
 import numpy as np
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, precision_score, recall_score, f1_score, roc_curve, auc, roc_auc_score
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import joblib
 import mlflow
 import subprocess
 import os
-from churn_prediction.config import PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
+from config import PROCESSED_DATA_PATH, XGB_IMPORTANT_FEATURES
+
+def load_model():
+    model_path = os.path.join("..", "models", "XGBoost_Tuned_RUS_Important_Features.joblib")
+    return joblib.load(model_path)
 
 def make_predictions(model, X_test):
     return model.predict(X_test)
@@ -49,8 +53,8 @@ def predict_and_evaluate(X_test, y_test):
 def save_predictions_to_excel(df, y_pred, y_pred_proba):
     df['churn_score'] = y_pred_proba
     df['churn_class'] = pd.cut(df['churn_score'] * 100, bins=[-1, 20, 40, 60, 80, 100], labels=["Very Low", "Low", "Average", "High Risk", "Very High Risk"])
-    df.to_excel("../data/processed/predictions.xlsx", index=False)
-    print("Predictions saved to ../data/processed/predictions.xlsx")
+    df.to_excel("../docs/df.xlsx", index=False)
+    print("Predictions saved to ../docs/df.xlsx")
     print("\nSample of predictions:")
     print(df[['churn_score', 'churn_class']].head())
     

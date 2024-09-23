@@ -2,8 +2,60 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from pyod.models.iforest import IForest
 import os
-from config import INTERIM_DATA_PATH, PROCESSED_DATA_PATH
+from config import DATA_PATH, INTERIM_DATA_PATH, PROCESSED_DATA_PATH
+
+def load_data(path=DATA_PATH):
+    return pd.read_csv(path, delimiter=';')
+
+def preprocess_data(df):
+    # Conversion des types
+    df['interet_compte_epargne_total'] = pd.to_numeric(df['interet_compte_epargne_total'], errors='coerce')
+    df['id_client'] = df['id_client'].astype(str)
+
+    # Gestion des valeurs manquantes
+    catcols = df.select_dtypes(include=['object']).columns
+    for col in catcols:
+        df[col] = df[col].fillna(df[col].mode()[0])
+
+    numcols = df.select_dtypes(include=[np.number]).columns
+    for col in numcols:
+        df[col] = df[col].fillna(df[col].median())
+
+    # Conversion des types booléens
+    bool_columns = ['espace_client_web', 'assurance_vie', 'banque_principale', 
+                    'compte_epargne', 'compte_courant', 'churn', 'compte_titres']
+    for col in bool_columns:
+        df[col] = df[col].map({'oui': True, 'non': False})
+
+    # Traitement des valeurs aberrantes
+    df = remove_outliers(df)
+
+    return df
+
+def remove_outliers(df):
+    clf = IForest(contamination=0.001, random_state=42)
+    
+    for col in ['anciennete_mois', 'interet_compte_epargne_total']:
+        values = df[[col]].values
+        clf.fit(values)
+        y_pred = clf.predict(values)
+        df = df[y_pred == 0]
+    
+    return df
+
+def save_interim_data(df, path = INTERIM_DATA_PATH):
+    df.to_parquet(path, engine='auto', compression='snappy', index=False)
+
+def load_interim_data(path = PROCESSED_DATA_PATH):
+    return pd.read_parquet(path)
+
+def save_processed_data(df, path = INTERIM_DATA_PATH):
+    df.to_parquet(path, engine='auto', compression='snappy', index=False)
+
+def load_processed_data(path = PROCESSED_DATA_PATH):
+    return pd.read_parquet(path)
 
 def calculer_score_engagement(row):
     score = 0
@@ -73,11 +125,18 @@ def apply_pca(df, columns_to_pca):
     return df
 
 def create_features(df):
+    
+    columns_to_pca = [col for col in df.columns if col.startswith('var_')]
+    df = apply_pca(df, columns_to_pca)
+    
     df['score_engagement'] = df.apply(calculer_score_engagement, axis=1)
     df = calculer_score_risque_financier(df)
     df = creer_categorie_age(df)
     
-    columns_to_pca = [col for col in df.columns if col.startswith('Var_')]
-    df = apply_pca(df, columns_to_pca)
-    
+    return df
+
+def one_hot_encoding(df):
+    catcols = ['genre', 'credit_autres', 'cartes_bancaires', 'compte_courant', 'espace_client', 'PEA', 'assurance_auto', 'assurance_habitation', 'credit_immo', 'type', 'methode_contact', 'segment_client', 'branche', 'categorie_age']
+    df = pd.get_dummies(df, columns=catcols)
+    print('New Number of Features:', df.shape[1])
     return df

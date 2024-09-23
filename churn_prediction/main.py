@@ -7,23 +7,24 @@ import os
 import subprocess
 
 from config import DATA_PATH, INTERIM_DATA_PATH, PROCESSED_DATA_PATH, MODELS_FOLDER, XGB_IMPORTANT_FEATURES
-from dataset import load_data, preprocess_data, save_processed_data
-from features import create_features
+from features import load_data, preprocess_data, save_interim_data, load_interim_data, create_features, one_hot_encoding, save_processed_data, load_processed_data
 from modeling.train import split_data, handle_class_imbalance, train_xgboost, evaluate_model, save_model
-from modeling.predict import load_model, make_predictions, make_probability_predictions, evaluate_model as predict_evaluate_model, save_predictions_to_excel, run_streamlit_app
+from modeling.predict import make_predictions, make_probability_predictions, evaluate_model as predict_evaluate_model, save_predictions_to_excel, run_streamlit_app
 
 def main():
-    
     print("Chargement et prétraitement des données...")
     df = load_data(DATA_PATH)
     df = preprocess_data(df)
-    save_processed_data(df, INTERIM_DATA_PATH)
+    save_interim_data(df, INTERIM_DATA_PATH)
 
     print("Création des features...") 
+    df = load_interim_data(INTERIM_DATA_PATH)
     df = create_features(df)
-    df.to_parquet(PROCESSED_DATA_PATH, engine='auto', compression='snappy', index=False) 
+    df = one_hot_encoding(df)
+    save_processed_data(df, PROCESSED_DATA_PATH)
 
     print("Préparation des données pour l'entraînement...")
+    df = load_processed_data(PROCESSED_DATA_PATH)
     X = df[XGB_IMPORTANT_FEATURES]
     y = df['churn']
     X_train, X_test, y_train, y_test = split_data(X, y)
@@ -43,7 +44,7 @@ def main():
     print(f"Modèle sauvegardé sous le nom: {model_name}")
 
     print("Prédictions et évaluation finale...")
-    final_model = load_model(best_model)
+    final_model = joblib.load(os.path.join(MODELS_FOLDER, f"{model_name}.joblib"))
     y_pred = make_predictions(final_model, X_test)
     y_pred_proba = make_probability_predictions(final_model, X_test)
     final_metrics = predict_evaluate_model(y_test, y_pred, y_pred_proba)

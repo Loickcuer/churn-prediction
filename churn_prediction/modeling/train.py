@@ -10,7 +10,7 @@ from config import PROCESSED_DATA_PATH, MODELS_FOLDER, XGB_IMPORTANT_FEATURES
 import joblib
 import os
 
-def load_data():
+def load_processed_data():
     df = pd.read_parquet(PROCESSED_DATA_PATH)
     X = df[XGB_IMPORTANT_FEATURES]
     y = df['churn']
