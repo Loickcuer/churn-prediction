@@ -6,6 +6,9 @@
 
 This project aims to develop a predictive system for a retail bank facing a customer attrition problem. Using a dataset comprising customer information and departure history over three months, the goal is to create a scoring model capable of identifying customers likely to leave the bank. The system must not only generate an attrition risk score but also provide explanations about the factors influencing this risk, thus allowing bank advisors to adapt their commercial approach. The analysis takes into account the bank's structure, divided into six branches with potentially different processes. The project encompasses in-depth statistical analyses, the construction of a robust predictive model, and the development of result interpretation tools, aiming to optimize customer retention through a data-driven and personalized approach.
 
+## How to run
+Just install the requirements and run the main.py file, it will clean the dataset, create features, save the new datasets, train a model, predict results and run a streamlit app.
+
 ## Project Organization
 
 ```
