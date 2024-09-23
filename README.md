@@ -9,6 +9,10 @@ This project aims to develop a predictive system for a retail bank facing a cust
 ## How to run
 Just install the requirements and run the main.py file, it will clean the dataset, create features, save the new datasets, train a model, predict results and run a streamlit app.
 
+## Streamlit App
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)] https://loickcuer-churn-prediction-docsstreamlit-app-susqjw.streamlit.app/
+
 ## Project Organization
 
 ```
