@@ -4,12 +4,32 @@
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
-This project aims to develop a predictive system for a retail bank facing a customer attrition problem. Using a dataset comprising customer information and departure history over three months, the goal is to create a scoring model capable of identifying customers likely to leave the bank. The system must not only generate an attrition risk score but also provide explanations about the factors influencing this risk, thus allowing bank advisors to adapt their commercial approach. The analysis takes into account the bank's structure, divided into six branches with potentially different processes. The project encompasses in-depth statistical analyses, the construction of a robust predictive model, and the development of result interpretation tools, aiming to optimize customer retention through a data-driven and personalized approach.
+This project aims to develop a predictive system for a retail bank facing a customer attrition problem. Using a dataset indexing customer information and departure history over three months, the goal is to create a scoring model capable of identifying customers likely to leave the bank. The system must not only generate an attrition risk score but also provide explanations about the factors influencing this risk, thus allowing bank advisors to adapt their commercial approach. The project encompasses in-depth statistical analyses, the construction of a robust predictive model, and the development of result interpretation tools, aiming to optimize customer retention through a data-driven and personalized approach.
 
-## How to run
-Just install the requirements and run the main.py file, it will clean the dataset, create features, save the new datasets, train a model, predict results and run a streamlit app.
+# Installation
+
+Use a dedicated environnement to install the librairies.
+
+Clone repo :
+```
+git clone https://github.com/Loickcuer/churn-prediction.git
+```
+
+Install the requirements for the app from the root folder of the project:
+```
+pip install -r requirements.txt
+```
+
+Scripts must be executed from the churn_prediction folder, not the root folder.
+
+Launching the dataset cleaning, the modeling and the streamlit app :
+```
+python main.py
+```
 
 ## Streamlit App
+
+You can have a look at the streamlit app serving as an interface for the bank advisors to use. 
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://loickcuer-churn-prediction-docsstreamlit-app-susqjw.streamlit.app/)
 
